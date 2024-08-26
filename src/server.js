@@ -3,6 +3,9 @@ import "dotenv/config"
 import express from "express"
 import cors from "cors";
 
+// Conexão com o banco de dados
+import conn from "./config/conn.js";
+
 // Importação de Rotas
 import taskRouter from "./routes/taskRouter.js"
 
@@ -21,7 +24,7 @@ app.use(express.json())
 app.use("/tarefas", taskRouter)
 
 app.listen(PORT, () => {
-  console.clear()
+  // console.clear()
   console.log("=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:")
   console.log(`| Bem-vindo à TO-DO LIST! 📋 |`)
   console.log(`| Servidor na porta: ${PORT} 🚀 |`)

@@ -3,9 +3,14 @@ import "dotenv/config"
 import express from "express"
 import cors from "cors";
 
+// Importando conexão via Sequelize
+import conn from "./config/conn.js";
+
+// Importação de Modelos
+import taskModel from "./models/taskModel.js"
+
 // Importação de Rotas
 import taskRouter from "./routes/taskRouter.js"
-import conn from "./config/conn.js";
 
 // Porta do Servidor
 const PORT = process.env.PORT || 3333

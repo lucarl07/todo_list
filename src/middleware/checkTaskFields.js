@@ -1,7 +1,7 @@
 const checkTaskFields = (req, res, next) => {
-  const { tarefa, descricao } = req.body
+  const { nome, descricao } = req.body
 
-  if (!tarefa) {
+  if (!nome) {
     res.status(400).json({
       err: "O nome da tarefa é obrigatório."
     })

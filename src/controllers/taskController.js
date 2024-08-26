@@ -14,11 +14,11 @@ export const getAllTasks = async (req, res) => {
 
 // Adicionar uma nova tarefa:
 export const createNewTask = async (req, res) => {
-  const { tarefa, descricao } = req.body
+  const { nome, descricao } = req.body
   const status = "pendente"
 
   const novaTarefa = { 
-    tarefa, descricao, status 
+    nome, descricao, status 
   }
 
   try {

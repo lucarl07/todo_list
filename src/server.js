@@ -23,9 +23,6 @@ app.use(cors())
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
 
-// Utilizando Rotas
-app.use("/tarefas", taskRouter)
-
 // Conectando com o banco de dados
 conn.sync().then(() => {
   app.listen(PORT, () => {
@@ -35,3 +32,14 @@ conn.sync().then(() => {
     console.log(`| Banco de dados conectado.  |\n`)
   })
 }).catch((error) => console.error(error))
+
+// Utilizando Rotas
+app.use("/tarefas", taskRouter)
+
+// Rota (404) Padrão
+app.use("/", (req, res) => {
+  res.status(404).json({
+    message: "Rota não encontrada.",
+    tip: "Verifique se você digitou o URL corretamente."
+  })
+})

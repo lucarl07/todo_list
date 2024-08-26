@@ -3,6 +3,9 @@ import "dotenv/config"
 import express from "express"
 import cors from "cors";
 
+// Importando Rotas
+import taskRouter from "./routes/taskRouter.js"
+
 // Porta do Servidor
 const PORT = process.env.PORT || 3333
 
@@ -13,3 +16,14 @@ const app = express();
 app.use(cors())
 app.use(express.urlencoded({extended: true}))
 app.use(express.json())
+
+// Utilizando Rotas
+app.use("/tarefas", taskRouter)
+
+app.listen(PORT, () => {
+  console.clear()
+  console.log("=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:")
+  console.log(`| Bem-vindo à TO-DO LIST! 📋 |`)
+  console.log(`| Servidor na porta: ${PORT} 🚀 |`)
+  console.log("=:=:=:=:=:=:=:=:=:=:=:=:=:=:=:\n")
+})

@@ -1,6 +1,6 @@
 import Tarefa from "../models/taskModel.js"
 
-// Buscar por todas as tarefas:
+// Listar todas as tarefas:
 export const getAllTasks = async (req, res) => {
   try {
     const tarefas = await Tarefa.findAll()

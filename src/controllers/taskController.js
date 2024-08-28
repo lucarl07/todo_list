@@ -83,7 +83,14 @@ export const updateTask = async (req, res) => {
   }
 
   try {
-    await Tarefa.update(tarefaAtualizada, { where: { tarefa_id: id } })
+    const [linhasAfetadas] = await Tarefa.update(tarefaAtualizada, { where: { tarefa_id: id } })
+
+    if (linhasAfetadas < 1) {
+      return res.status(404).json({
+        message: "Tarefa não encontrada."
+      })
+    }
+
     res.status(200).json({
       message: "Tarefa atualizada com sucesso."
     })

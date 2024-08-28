@@ -9,7 +9,8 @@ import checkTaskUpdate from "../middleware/checkTaskUpdate.js"
 import {
   createNewTask,
   getTasksByPage,
-  getTasksByID
+  getTasksByID,
+  updateTask
 } from "../controllers/taskController.js"
 
 // Declarando o roteador:
@@ -19,6 +20,6 @@ const router = Router();
 router.post("/", checkNewTaskBody, createNewTask)
 router.get("/", getTasksByPage)
 router.get("/:id", getTasksByID)
-router.put("/:id", checkTaskUpdate)
+router.put("/:id", checkTaskUpdate, updateTask)
 
 export default router;

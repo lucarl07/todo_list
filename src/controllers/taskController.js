@@ -71,3 +71,25 @@ export const getTasksByID = async (req, res) => {
     })
   }
 }
+
+export const updateTask = async (req, res) => {
+  const { id } = req.params
+  const { nome, descricao, status } = req.body
+  
+  const tarefaAtualizada = {
+    nome,
+    descricao,
+    status,
+  }
+
+  try {
+    await Tarefa.update(tarefaAtualizada, { where: { tarefa_id: id } })
+    res.status(200).json({
+      message: "Tarefa atualizada com sucesso."
+    })
+  } catch (error) {
+    res.status(500).json({
+      err: "Erro ao atualizar tarefa."
+    })
+  }
+}

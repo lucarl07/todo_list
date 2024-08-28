@@ -2,7 +2,7 @@
 import { Router } from "express";
 
 // Métodos auxiliares (middleware):
-import checkTaskFields from "../middleware/checkTaskFields.js";
+import checkNewTaskBody from "../middleware/checkNewTaskBody.js";
 
 // Métodos do controlador:
 import {
@@ -15,7 +15,7 @@ import {
 const router = Router();
 
 // Endpoints:
-router.post("/", checkTaskFields, createNewTask)
+router.post("/", checkNewTaskBody, createNewTask)
 router.get("/", getTasksByPage)
 router.get("/:id", getTasksByID)
 

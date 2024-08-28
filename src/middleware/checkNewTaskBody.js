@@ -1,4 +1,4 @@
-const checkTaskFields = (req, res, next) => {
+const validation = (req, res, next) => {
   const { nome, descricao } = req.body
 
   if (!nome) {
@@ -15,4 +15,4 @@ const checkTaskFields = (req, res, next) => {
   next();
 }
 
-export default checkTaskFields;
+export default validation;

@@ -50,3 +50,24 @@ export const getTasksByPage = async (req, res) => {
     })
   }
 }
+
+export const getTasksByID = async (req, res) => {
+  const tarefaId = req.params.id
+
+  try {
+    const tarefa = await Tarefa.findByPk(tarefaId)
+
+    if (tarefa) {
+      res.status(200).json(tarefa)
+    } else {
+      res.status(404).json({
+        message: "Tarefa não encontrada."
+      })
+    }
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({
+      err: "Erro interno ao buscar a tarefa."
+    })
+  }
+}

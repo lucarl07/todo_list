@@ -119,9 +119,7 @@ export const updateStatus = async (req, res) => {
   try {
     const tarefa = await Tarefa.findOne({ where: { tarefa_id: id } })
 
-    if (tarefa) {
-      res.status(200).json(tarefa)
-    } else {
+    if (!tarefa) {
       res.status(404).json({
         message: "Tarefa não encontrada."
       })

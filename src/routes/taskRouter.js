@@ -12,7 +12,8 @@ import {
   getTasksByPage,
   getTasksByID,
   updateTask,
-  updateStatus
+  updateStatus,
+  getTasksByStatus
 } from "../controllers/taskController.js"
 
 // Declarando o roteador:
@@ -24,5 +25,6 @@ router.get("/", getTasksByPage)
 router.get("/:id", getTasksByID)
 router.put("/:id", checkTaskUpdate, updateTask)
 router.patch("/:id/status", checkStatusUpdate, updateStatus)
+router.get("/status/:situacao", getTasksByStatus)
 
 export default router;

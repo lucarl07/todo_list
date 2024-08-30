@@ -105,7 +105,7 @@ export const updateTask = async (req, res) => {
   }
 }
 
-// Atualizar Status da Tarefa
+// Atualizar status da tarefa
 export const updateStatus = async (req, res) => {
   const { id } = req.params
   const { status } = req.body
@@ -136,6 +136,26 @@ export const updateStatus = async (req, res) => {
     console.error(error)
     res.status(500).json({
       err: "Erro interno ao alterar o status da tarefa."
+    })
+  }
+}
+
+// Buscar tarefas por situação
+export const getTasksByStatus = async (req, res) => {
+  const { situacao } = req.params
+
+  try {
+    const tarefa = await Tarefa.findAll({
+      where: {
+        status: situacao
+      }
+    })
+
+    res.status(200).json(tarefa)
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({
+      err: "Erro interno ao buscar as tarefas."
     })
   }
 }

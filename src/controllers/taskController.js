@@ -110,18 +110,19 @@ export const updateStatus = async (req, res) => {
   const { id } = req.params
   const { status } = req.body
 
+  if (status !== "pendente" && status !== "concluida") {
+    return res.status(400).json({
+      err: "Valor inválido passado como status da tarefa."
+    })
+  }
+
   try {
     const tarefa = await Tarefa.findOne({ where: { tarefa_id: id } })
-    
-    const tarefaColunas = await sequelize.query("SHOW COLUMNS FROM tarefas"),
-      valoresStatus = tarefaColunas[0][3]["Type"]
+    await tarefa.update({ status })
 
-    console.log(typeof valoresStatus)
-
-    res.status(200).json(valoresStatus)
-    
-    // tarefa.set({ status })
-    // await tarefa.save()
+    res.status(200).json({
+      message: `O status da tarefa foi alterado para ${status}.`
+    })
   } catch (error) {
     console.error(error)
     res.status(500).json({

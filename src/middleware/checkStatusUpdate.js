@@ -7,11 +7,11 @@ const validation = (req, res, next) => {
     })
   }
 
-  const { status } = req.query
-  
+  const { status } = req.body
+
   if (!status) {
     return res.status(400).json({
-      message: "O status da tarefa é obrigatório."
+      message: "É preciso que seja passado, no corpo da requisição, o status atualizado."
     })
   }
 

@@ -51,6 +51,7 @@ export const getTasksByPage = async (req, res) => {
   }
 }
 
+// Buscar tarefa por ID
 export const getTasksByID = async (req, res) => {
   const tarefaId = req.params.id
 
@@ -72,6 +73,7 @@ export const getTasksByID = async (req, res) => {
   }
 }
 
+// Atualizar tarefa
 export const updateTask = async (req, res) => {
   const { id } = req.params
   const { nome, descricao, status } = req.body

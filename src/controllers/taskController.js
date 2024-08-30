@@ -1,4 +1,6 @@
 import Tarefa from "../models/taskModel.js"
+import sequelize from "../config/conn.js"
+import { QueryTypes } from "sequelize"
 
 // Adicionar uma nova tarefa:
 export const createNewTask = async (req, res) => {
@@ -99,6 +101,31 @@ export const updateTask = async (req, res) => {
   } catch (error) {
     res.status(500).json({
       err: "Erro ao atualizar tarefa."
+    })
+  }
+}
+
+// Atualizar Status da Tarefa
+export const updateStatus = async (req, res) => {
+  const { id } = req.params
+  const { status } = req.body
+
+  try {
+    const tarefa = await Tarefa.findOne({ where: { tarefa_id: id } })
+    
+    const tarefaColunas = await sequelize.query("SHOW COLUMNS FROM tarefas"),
+      valoresStatus = tarefaColunas[0][3]["Type"]
+
+    console.log(typeof valoresStatus)
+
+    res.status(200).json(valoresStatus)
+    
+    // tarefa.set({ status })
+    // await tarefa.save()
+  } catch (error) {
+    console.error(error)
+    res.status(500).json({
+      err: "Erro interno ao alterar o status da tarefa."
     })
   }
 }

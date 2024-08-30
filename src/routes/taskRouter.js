@@ -4,13 +4,15 @@ import { Router } from "express";
 // Métodos auxiliares (middleware):
 import checkNewTaskBody from "../middleware/checkNewTaskBody.js";
 import checkTaskUpdate from "../middleware/checkTaskUpdate.js"
+import checkStatusUpdate from "../middleware/checkStatusUpdate.js"
 
 // Métodos do controlador:
 import {
   createNewTask,
   getTasksByPage,
   getTasksByID,
-  updateTask
+  updateTask,
+  updateStatus
 } from "../controllers/taskController.js"
 
 // Declarando o roteador:
@@ -21,5 +23,6 @@ router.post("/", checkNewTaskBody, createNewTask)
 router.get("/", getTasksByPage)
 router.get("/:id", getTasksByID)
 router.put("/:id", checkTaskUpdate, updateTask)
+router.patch("/:id/status", checkStatusUpdate, updateStatus)
 
 export default router;

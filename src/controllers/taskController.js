@@ -144,6 +144,12 @@ export const updateStatus = async (req, res) => {
 export const getTasksByStatus = async (req, res) => {
   const { situacao } = req.params
 
+  if (situacao !== "pendente" && situacao !== "concluida") {
+    return res.status(400).json({
+      err: "Valor inválido passado como situação da tarefa."
+    })
+  }
+
   try {
     const tarefa = await Tarefa.findAll({
       where: {

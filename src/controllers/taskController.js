@@ -4,6 +4,7 @@ import Tarefa from "../models/taskModel.js";
 
 // Validações com Zod:
 import updateSchema from "../validators/updateSchema.js";
+import taskIdSchema from "../validators/taskIdSchema.js";
 
 const createSchema = z.object({
   nome: 
@@ -16,12 +17,6 @@ const createSchema = z.object({
     .max(1000, { message: "A descrição não pode conter mais de 1000 cracteres." })
   )
 })
-
-const taskIdSchema = z.object({
-  id: z.string().uuid({
-    message: "O formato do identificador não é UUID.",
-  }),
-});
 
 // Adicionar uma nova tarefa:
 export const createNewTask = async (req, res) => {

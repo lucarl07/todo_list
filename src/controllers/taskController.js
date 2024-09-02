@@ -1,6 +1,5 @@
+import { z } from "zod"
 import Tarefa from "../models/taskModel.js"
-import sequelize from "../config/conn.js"
-import { QueryTypes } from "sequelize"
 
 // Adicionar uma nova tarefa:
 export const createNewTask = async (req, res) => {
@@ -8,7 +7,9 @@ export const createNewTask = async (req, res) => {
   const status = "pendente"
 
   const novaTarefa = { 
-    nome, descricao, status 
+    nome, 
+    descricao: descricao || "",
+    status 
   }
 
   try {

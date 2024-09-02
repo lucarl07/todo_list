@@ -1,8 +1,33 @@
 import { z } from "zod"
+import formatZodError from "../helpers/formatZodError.js"
 import Tarefa from "../models/taskModel.js"
+
+// Validações com Zod:
+const createSchema = z.object({
+  nome: z
+    .string()
+    .min(5, { message: "O nome da tarefa deve ter pelo menos 5 caracteres." })
+    .max(100, { message: "O nome da tarefa não pode ter mais de 100 caracteres." })
+    .transform(txt => txt.toLowerCase()),
+  descricao: z.optional(
+    z
+    .string()
+    .min(10, { message: "A descrição deve conter pelo menos 10 caracteres." })
+    .max(1000, { message: "A descrição não pode conter mais de 1000 cracteres." })
+  )
+})
 
 // Adicionar uma nova tarefa:
 export const createNewTask = async (req, res) => {
+  const bodyValidation = createSchema.safeParse(req.body)
+  
+  if (!bodyValidation.success) {
+    return res.status(400).json({
+      message: "Os dados recebidos do corpo da requisição são inválidos.",
+      details: formatZodError(bodyValidation.error)
+    })
+  }
+
   const { nome, descricao } = req.body
   const status = "pendente"
 

@@ -2,7 +2,6 @@
 import { Router } from "express";
 
 // Métodos auxiliares (middleware):
-import checkTaskUpdate from "../middleware/checkTaskUpdate.js";
 import checkStatusUpdate from "../middleware/checkStatusUpdate.js";
 
 // Métodos do controlador:
@@ -22,7 +21,7 @@ const router = Router();
 router.post("/", createNewTask);
 router.get("/", getTasksByPage);
 router.get("/:id", getTaskByID);
-router.put("/:id", checkTaskUpdate, updateTask);
+router.put("/:id", updateTask);
 router.patch("/:id/status", checkStatusUpdate, updateStatus);
 router.get("/status/:situacao", getTasksByStatus);
 

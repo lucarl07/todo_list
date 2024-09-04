@@ -7,14 +7,6 @@ const validation = (req, res, next) => {
     })
   }
 
-  const { status } = req.body
-
-  if (!status) {
-    return res.status(400).json({
-      message: "É preciso que seja passado, no corpo da requisição, o status atualizado."
-    })
-  }
-
   next();
 }
 

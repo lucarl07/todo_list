@@ -108,13 +108,6 @@ export const updateTask = async (req, res) => {
 // Atualizar Status da Tarefa
 export const updateStatus = async (req, res) => {
   const { id } = req.params
-  const { status } = req.body
-
-  if (status !== "pendente" && status !== "concluida") {
-    return res.status(400).json({
-      err: "Valor inválido passado como status da tarefa."
-    })
-  }
 
   try {
     const tarefa = await Tarefa.findOne({ where: { tarefa_id: id } })
@@ -125,7 +118,7 @@ export const updateStatus = async (req, res) => {
       })
     }
 
-    await tarefa.update({ status })
+    await tarefa.update({})
 
     res.status(200).json({
       message: `O status da tarefa foi alterado para ${status}.`

@@ -1,4 +1,3 @@
-import { z } from "zod";
 import formatZodError from "../helpers/formatZodError.js";
 import Tarefa from "../models/taskModel.js";
 

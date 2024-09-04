@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 const createSchema = z.object({
   nome: 
     z.string()

@@ -1,3 +1,5 @@
+import { z } from "zod";
+
 const updateSchema = z.object({
   nome: z.optional(
     z.string()

@@ -2,7 +2,7 @@
 import { Router } from "express";
 
 // Métodos auxiliares (middleware):
-import checkStatusUpdate from "../middleware/checkStatusUpdate.js";
+import checkStatusUpdate from "../helpers/checkStatusUpdate.js";
 
 // Métodos do controlador:
 import {

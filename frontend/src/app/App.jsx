@@ -1,10 +1,12 @@
 import React from 'react'
+import { Container } from 'react-bootstrap';
+import ToDoForm from '../components/ToDoForm';
 
 const App = () => {
   return (
-    <div>
-      <h1>Olá mundo!</h1>
-    </div>
+    <Container>
+      <ToDoForm />
+    </Container>
   )
 }
 

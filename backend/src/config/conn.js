@@ -1,8 +1,8 @@
 import { Sequelize } from "sequelize";
 
-const conn = new Sequelize("todo_list", "root", "Sen@iDev77!.", {
-  host: "localhost",
-  dialect: "mysql"
+const conn = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASSWORD, {
+  host: process.env.DB_HOST,
+  dialect: process.env.DB_DIALECT
 })
 
 /** Testando a conexão com o banco de dados:

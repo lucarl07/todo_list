@@ -4,7 +4,6 @@ import { Form, Button } from 'react-bootstrap';
 
 // API services:
 import createTask from '../api/createTask';
-import TaskUpdater from './TaskUpdater';
 
 const ToDoForm = () => {
   const [tarefa, updateTarefa] = React.useReducer((prev, next) => {

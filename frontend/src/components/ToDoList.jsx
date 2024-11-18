@@ -3,7 +3,7 @@ import React from 'react';
 import { Table } from 'react-bootstrap';
 
 // API services:
-import getTaskList from '../services/getTaskList';
+import getTaskList from '../api/getTaskList';
 
 const ToDoList = () => {
   const [tarefas, setTarefas] = React.useState([])

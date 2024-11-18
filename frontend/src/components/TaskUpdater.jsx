@@ -1,18 +1,19 @@
-import React from 'react'
-import { Button, Modal, Form, Dropdown } from 'react-bootstrap';
+import { useReducer } from 'react'
+import { Button, Modal, Form } from 'react-bootstrap';
 import updateTask from '../api/updateTask';
 
 const TaskUpdater = ({ taskId, state, onHide }) => {
-  const [body, updateBody] = React.useReducer((prev, next) => {
+  const [body, updateBody] = useReducer((prev, next) => {
     return { ...prev, ...next };
   }, { 
     nome: '', descricao: '', status: ''
   });
 
-  // const onUpdate = () => {
-  //   updateTask(taskId, body)
-  //   onHide()
-  // }
+  const onUpdate = () => {
+    updateTask(taskId, body)
+    onHide()
+  }
+  const isSelectBlank = (body.status) && (body.status != "Selecione o status") ? false : true
 
   return (
     <Modal show={state} onHide={onHide}>
@@ -22,43 +23,43 @@ const TaskUpdater = ({ taskId, state, onHide }) => {
 
       <Modal.Body>
         <Form>
-          <Form.Group className="mb-3" controlId="novaTarefa.nomeTarefa">
+          <Form.Group className="mb-3" controlId="atualizarTarefa.nomeTarefa">
             <Form.Label>Nome:</Form.Label>
             <Form.Control 
               type="text" 
-              placeholder="Ex.: Limpar quarto 012..."
+              placeholder="Ex.: Trocar ar-condicionado..."
               value={body.nome}
-              onChange={(e) => updateTarefa({ nome: e.target.value})} />
+              onChange={(e) => updateBody({ nome: e.target.value})} />
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="novaTarefa.descricaoTarefa">
+          <Form.Group className="mb-3" controlId="atualizarTarefa.descricaoTarefa">
             <Form.Label>Descrição:</Form.Label>
             <Form.Control 
               as="textarea" 
               rows={3}
               value={body.descricao}
-              onChange={(e) => updateTarefa({ descricao: e.target.value})} />
+              onChange={(e) => updateBody({ descricao: e.target.value })} />
           </Form.Group>
 
-          <Dropdown>
-            <Dropdown.Toggle variant="light" id="dropdown-basic">
-              Dropdown Button
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-              <Dropdown.Item href="#/">Action</Dropdown.Item>
-              <Dropdown.Item href="#/">Another action</Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
+          <Form.Group className="mb-3" controlId="atualizarTarefa.statusTarefa">
+            <Form.Label>Status:</Form.Label>
+            <Form.Select 
+              value={body.status}
+              onChange={(e) => updateBody({ status: e.target.value })}>
+              <option>Selecione o status</option>
+              <option value="pendente">Pendente</option>
+              <option value="concluida">Concluída</option>
+            </Form.Select>
+          </Form.Group>
         </Form>
       </Modal.Body>
 
       <Modal.Footer>
-        <Button variant="secondary" onClick={onHide}>
-          Fechar
+        <Button variant="danger" onClick={onHide}>
+          Fechar janela
         </Button>
-        <Button variant="primary" onClick={onHide}>
-          Salvar alterações
+        <Button variant="primary" onClick={onUpdate} disabled={isSelectBlank}>
+          Enviar alterações
         </Button>
       </Modal.Footer>
     </Modal>

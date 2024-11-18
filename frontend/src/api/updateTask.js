@@ -2,14 +2,14 @@ import axios from "axios";
 
 const updateTask = async (taskId, body) => {
   await axios
-    .put(`http://localhost:2608/tarefas/${taskId}`, { ...body })
+    .put(`http://localhost:2608/tarefas/${taskId}`, {...body})
     .then(({data}) => {
       const msg = data.message
-      console.log(msg)
+      window.alert(msg)
     })
     .catch((error) => {
-      console.log(error)
-      throw new Error('Um erro ocorreu. Verifique o console para mais informações.')
+      window.alert(error)
+      throw new Error(error)
     })
 }
 
